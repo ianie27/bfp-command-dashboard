@@ -1,0 +1,140 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Citizen / app collections written by the EmberNet mobile app
+    match /users/{userId} {
+      allow read: if true;
+      allow write: if request.auth != null && request.auth.uid == userId;
+    }
+
+    match /fire_reports/{reportId} {
+      allow read: if request.auth != null;
+      allow write: if request.auth != null;
+    }
+
+    match /reports/{reportId} {
+      allow read, write: if request.auth != null;
+    }
+
+    match /emergency_calls/{callId} {
+      allow read, write: if request.auth != null;
+    }
+
+    match /truck_locations/{reportId} {
+      allow read, write: if request.auth != null;
+    }
+
+    match /user_locations/{docId} {
+      allow read, write: if request.auth != null;
+    }
+
+    match /saved_locations/{docId} {
+      allow read: if request.auth != null;
+      allow write: if request.auth != null && (
+        resource == null ? request.resource.data.userId == request.auth.uid : resource.data.userId == request.auth.uid
+      );
+    }
+
+    match /emergency_contacts/{docId} {
+      allow read: if request.auth != null;
+      allow write: if request.auth != null && (
+        resource == null ? request.resource.data.userId == request.auth.uid : resource.data.userId == request.auth.uid
+      );
+    }
+
+    match /login_history/{docId} {
+      allow read: if request.auth != null;
+      allow write: if request.auth != null;
+    }
+
+    match /devices/{docId} {
+      allow read, write: if request.auth != null;
+    }
+
+    match /user_settings/{userId} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+    }
+
+    match /temp_codes/{docId} {
+      allow read, write: if request.auth != null;
+    }
+
+    match /consents/{consentId} {
+      allow read, write: if request.auth != null;
+    }
+
+    match /mail/{mailId} {
+      allow read, write: if request.auth != null;
+    }
+
+    match /email_preferences/{docId} {
+      allow read, write: if request.auth != null;
+    }
+
+    match /notification_settings/{docId} {
+      allow read, write: if request.auth != null;
+    }
+
+    match /privacy_settings/{docId} {
+      allow read, write: if request.auth != null;
+    }
+
+    // Connection testing
+    match /test/{docId} {
+      allow read, write: if true;
+    }
+
+    // Web dashboard specific collections
+    match /bfp_personnel/{uid} {
+      allow read: if true;
+      allow write: if request.auth != null && (
+        request.auth.uid == uid ||
+        get(/databases/$(database)/documents/bfp_personnel/$(request.auth.uid)).data.role == 'Administrator'
+      );
+    }
+
+    match /audit_logs/{logId} {
+      allow read: if request.auth != null;
+      allow write: if request.auth != null;
+    }
+
+    match /response_units/{unitId} {
+      allow read: if request.auth != null;
+      allow write: if request.auth != null;
+    }
+
+    match /unit_tracking_history/{trackId} {
+      allow read: if request.auth != null;
+      allow write: if request.auth != null;
+    }
+
+    match /iot_sensors/{sensorId} {
+      allow read: if request.auth != null;
+      allow write: if request.auth != null;
+    }
+
+    match /sensor_readings/{readingId} {
+      allow read: if request.auth != null;
+      allow write: if request.auth != null;
+    }
+
+    match /incident_status_history/{historyId} {
+      allow read: if request.auth != null;
+      allow write: if request.auth != null;
+    }
+
+    match /dispatches/{dispatchId} {
+      allow read, write: if request.auth != null;
+    }
+
+    match /notifications/{notificationId} {
+      allow read, write: if request.auth != null;
+    }
+
+    // Catch-all: any other collection requires authentication.
+    match /{document=**} {
+      allow read, write: if request.auth != null;
+    }
+  }
+}

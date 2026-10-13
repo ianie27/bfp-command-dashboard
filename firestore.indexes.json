@@ -1,0 +1,14 @@
+{
+  "indexes": [
+    {
+      "collectionGroup": "unit_dispatches",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "target_unit_id", "order": "ASCENDING" },
+        { "fieldPath": "acknowledged", "order": "ASCENDING" },
+        { "fieldPath": "dispatched_at", "order": "DESCENDING" }
+      ]
+    }
+  ],
+  "fieldOverrides": []
+}

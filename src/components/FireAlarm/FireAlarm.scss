@@ -1,0 +1,340 @@
+// src/components/FireAlarm/FireAlarm.scss
+.fire-alarm-fullscreen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #0a0000;
+  z-index: 99999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  animation: alarmIn 0.5s ease;
+
+  @keyframes alarmIn {
+    from { opacity: 0; transform: scale(0.8); }
+    to { opacity: 1; transform: scale(1); }
+  }
+
+  // Flash Overlay
+  .flash-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(255, 0, 0, 0.15);
+    pointer-events: none;
+    transition: background 0.1s;
+    
+    &.flash {
+      background: rgba(255, 0, 0, 0.5);
+    }
+  }
+
+  // Rotating Alert Bars
+  .alert-bars {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+
+    .alert-bar {
+      position: absolute;
+      width: 200%;
+      height: 8px;
+      background: linear-gradient(90deg, 
+        transparent 0%, 
+        rgba(255, 0, 0, 0.8) 10%, 
+        rgba(255, 50, 0, 0.9) 30%,
+        rgba(255, 0, 0, 0.8) 50%,
+        rgba(255, 50, 0, 0.9) 70%,
+        rgba(255, 0, 0, 0.8) 90%,
+        transparent 100%
+      );
+      opacity: 0.6;
+      animation: rotateBar 4s linear infinite;
+      transform-origin: center;
+
+      &.bar-1 { top: 10%; animation-delay: 0s; }
+      &.bar-2 { top: 30%; animation-delay: -1s; }
+      &.bar-3 { top: 60%; animation-delay: -2s; }
+      &.bar-4 { top: 85%; animation-delay: -3s; }
+    }
+
+    @keyframes rotateBar {
+      from { transform: rotate(0deg) translateX(-50%); }
+      to { transform: rotate(360deg) translateX(-50%); }
+    }
+  }
+
+  // Alarm Content
+  .alarm-content {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    color: #fff;
+
+    .alarm-icon {
+      position: relative;
+      width: 120px;
+      height: 120px;
+      margin: 0 auto 30px;
+
+      .fire-icon {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 60px;
+        color: #ff0000;
+        z-index: 2;
+        animation: firePulse 0.5s ease-in-out infinite alternate;
+        filter: drop-shadow(0 0 40px rgba(255, 0, 0, 0.8));
+      }
+
+      .pulse-ring {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        border-radius: 50%;
+        border: 4px solid rgba(255, 0, 0, 0.3);
+        animation: pulseRing 1.5s ease-out infinite;
+
+        &.ring-1 { width: 100%; height: 100%; animation-delay: 0s; }
+        &.ring-2 { width: 150%; height: 150%; animation-delay: 0.5s; }
+        &.ring-3 { width: 200%; height: 200%; animation-delay: 1s; }
+      }
+    }
+
+    @keyframes firePulse {
+      0% { transform: translate(-50%, -50%) scale(1); }
+      100% { transform: translate(-50%, -50%) scale(1.2); }
+    }
+
+    @keyframes pulseRing {
+      0% { transform: translate(-50%, -50%) scale(0.8); opacity: 1; }
+      100% { transform: translate(-50%, -50%) scale(2); opacity: 0; }
+    }
+
+    .alarm-title {
+      font-size: clamp(2rem, 5vw, 4rem);
+      font-weight: 900;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+      text-shadow: 
+        0 0 20px rgba(255, 0, 0, 0.5),
+        0 0 40px rgba(255, 0, 0, 0.3),
+        0 0 80px rgba(255, 0, 0, 0.2);
+      animation: titlePulse 0.5s ease-in-out infinite alternate;
+
+      .blink-text {
+        display: inline-block;
+        animation: blinkText 0.5s step-end infinite;
+      }
+    }
+
+    @keyframes titlePulse {
+      0% { text-shadow: 0 0 20px rgba(255, 0, 0, 0.5); }
+      100% { text-shadow: 0 0 40px rgba(255, 0, 0, 0.8), 0 0 80px rgba(255, 0, 0, 0.4); }
+    }
+
+    @keyframes blinkText {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+
+    .alarm-status {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 30px;
+      margin: 20px 0;
+
+      .status-indicator {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 1.2rem;
+        font-weight: 700;
+        color: #ff0000;
+
+        .status-dot {
+          width: 16px;
+          height: 16px;
+          border-radius: 50%;
+          background: #ff0000;
+          box-shadow: 0 0 20px rgba(255, 0, 0, 0.8);
+          transition: all 0.1s;
+
+          &.active {
+            animation: dotBlink 0.5s step-end infinite;
+          }
+        }
+      }
+
+      .countdown {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: #ff4444;
+        background: rgba(255, 0, 0, 0.1);
+        padding: 8px 20px;
+        border-radius: 30px;
+        border: 2px solid rgba(255, 0, 0, 0.3);
+        display: flex;
+        align-items: center;
+      }
+    }
+
+    @keyframes dotBlink {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.3; transform: scale(0.8); }
+    }
+
+    .alarm-message {
+      font-size: clamp(1rem, 2vw, 1.5rem);
+      font-weight: 700;
+      color: #ff6666;
+      padding: 15px 30px;
+      background: rgba(255, 0, 0, 0.15);
+      border: 2px solid rgba(255, 0, 0, 0.3);
+      border-radius: 12px;
+      margin: 20px auto;
+      display: inline-flex;
+      align-items: center;
+      animation: messagePulse 1s ease-in-out infinite alternate;
+    }
+
+    @keyframes messagePulse {
+      0% { background: rgba(255, 0, 0, 0.15); }
+      100% { background: rgba(255, 0, 0, 0.3); }
+    }
+
+    .alarm-actions {
+      margin: 30px 0;
+
+      .silence-btn {
+        padding: 16px 50px;
+        font-size: 1.2rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        border-radius: 50px;
+        background: linear-gradient(135deg, #ff0000, #cc0000);
+        border: none;
+        box-shadow: 0 0 40px rgba(255, 0, 0, 0.4);
+        transition: all 0.3s ease;
+
+        &:hover {
+          transform: scale(1.05);
+          box-shadow: 0 0 60px rgba(255, 0, 0, 0.6);
+          background: linear-gradient(135deg, #ff2200, #dd0000);
+        }
+
+        &:active {
+          transform: scale(0.95);
+        }
+      }
+    }
+
+    .alarm-info {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 12px;
+      margin-top: 20px;
+      padding: 20px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 12px;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+
+      .info-item {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.9rem;
+        color: rgba(255, 255, 255, 0.8);
+        padding: 8px 12px;
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 8px;
+        
+        svg {
+          color: #ff4444;
+        }
+      }
+    }
+  }
+
+  // Siren Waves
+  .siren-waves {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+
+    .wave {
+      position: absolute;
+      bottom: -20%;
+      left: -10%;
+      width: 120%;
+      height: 120%;
+      border-radius: 45%;
+      background: radial-gradient(ellipse at center, rgba(255, 0, 0, 0.05) 0%, transparent 70%);
+      animation: waveMove 8s linear infinite;
+
+      &.wave-1 { animation-delay: 0s; }
+      &.wave-2 { animation-delay: -2s; opacity: 0.7; }
+      &.wave-3 { animation-delay: -4s; opacity: 0.5; }
+      &.wave-4 { animation-delay: -6s; opacity: 0.3; }
+    }
+
+    @keyframes waveMove {
+      0% { transform: translate(0, 0) scale(1) rotate(0deg); }
+      25% { transform: translate(5%, -5%) scale(1.05) rotate(5deg); }
+      50% { transform: translate(0, 0) scale(1) rotate(0deg); }
+      75% { transform: translate(-5%, 5%) scale(0.95) rotate(-5deg); }
+      100% { transform: translate(0, 0) scale(1) rotate(0deg); }
+    }
+  }
+}
+
+// Trigger Button
+.fire-alarm-trigger {
+  .trigger-btn {
+    padding: 20px 60px;
+    font-size: 1.5rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    border-radius: 50px;
+    background: linear-gradient(135deg, #ff0000, #cc0000);
+    border: none;
+    box-shadow: 0 0 40px rgba(255, 0, 0, 0.4);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+
+    &::before {
+      content: '';
+      position: absolute;
+      inset: -2px;
+      background: linear-gradient(90deg, #ff0000, #ff6600, #ff0000, #ff6600);
+      background-size: 300% 100%;
+      border-radius: 50px;
+      z-index: -1;
+      animation: borderGlow 3s linear infinite;
+    }
+
+    &:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 60px rgba(255, 0, 0, 0.6);
+    }
+
+    &:active {
+      transform: scale(0.95);
+    }
+  }
+
+  @keyframes borderGlow {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 300% 50%; }
+  }
+}

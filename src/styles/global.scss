@@ -1,0 +1,1162 @@
+// ============================================
+// GLOBAL RESET (must be first)
+// ============================================
+html,
+body,
+#root {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  background-color: #0d0d1a;
+}
+// ============================================
+// EMBERNET BFP COMMAND DASHBOARD
+// Premium Dark Theme - Red, Orange, Black Palette
+// Dark Theme Only - Professional Enterprise Design
+// ============================================
+
+// Font Imports
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+// ============================================
+// MIXINS FOR CROSS-BROWSER COMPATIBILITY
+// ============================================
+
+@mixin backdrop-blur($amount) {
+  -webkit-backdrop-filter: blur($amount);
+  backdrop-filter: blur($amount);
+}
+
+@mixin backdrop-blur-saturate($blur, $saturate) {
+  -webkit-backdrop-filter: blur($blur) saturate($saturate);
+  backdrop-filter: blur($blur) saturate($saturate);
+}
+
+// ============================================
+// COLOR SYSTEM - DARK THEME EXCLUSIVE
+// ============================================
+
+// Primary Brand Colors
+$primary-red: #e63946;
+$primary-red-light: #ff6b6b;
+$primary-red-dark: #c1121f;
+$primary-red-deep: #9b2226;
+
+$primary-orange: #f4a261;
+$primary-orange-light: #ffb703;
+$primary-orange-dark: #e76f51;
+$primary-orange-deep: #ca6702;
+
+// Secondary Colors
+$secondary: #457b9d;
+$secondary-light: #6baed6;
+$secondary-dark: #1d3557;
+
+// Functional Colors
+$success: #2a9d8f;
+$success-light: #48cae4;
+$success-dark: #1b7b6e;
+
+$warning: #f4a261;
+$warning-light: #ffb703;
+$warning-dark: #ca6702;
+
+$danger: #e63946;
+$danger-light: #ff6b6b;
+$danger-dark: #c1121f;
+
+$info: #00b4d8;
+$info-light: #48cae4;
+$info-dark: #0096c7;
+
+// Dark Theme Base Colors (Only Dark Tones)
+$black: #0b132b;
+$black-light: #1a1a2e;
+$black-medium: #16213e;
+$darker: #070d1b;
+$dark-surface: #0f141f;
+$dark-elevated: #1a2235;
+
+// Neutral Dark Colors
+$gray-100: #f1f5f9;
+$gray-200: #e2e8f0;
+$gray-300: #cbd5e1;
+$gray-400: #94a3b8;
+$gray-500: #64748b;
+$gray-600: #475569;
+$gray-700: #334155;
+$gray-800: #1e293b;
+$gray-900: #0f172a;
+
+// Text Colors - Dark Theme Only
+$text-primary: #ffffff;
+$text-secondary: rgba(255, 255, 255, 0.75);
+$text-tertiary: rgba(255, 255, 255, 0.5);
+$text-disabled: rgba(255, 255, 255, 0.35);
+$text-muted: rgba(255, 255, 255, 0.45);
+
+// Backgrounds - Dark Only
+$bg-primary: $black;
+$bg-secondary: $black-light;
+$bg-tertiary: $black-medium;
+$bg-elevated: rgba(255, 255, 255, 0.04);
+$bg-glass: rgba(26, 26, 46, 0.85);
+$bg-glass-light: rgba(26, 26, 46, 0.7);
+$bg-card: rgba(11, 19, 43, 0.8);
+
+// Border Colors - Dark Theme
+$border-light: rgba(244, 162, 97, 0.12);
+$border-medium: rgba(244, 162, 97, 0.2);
+$border-strong: rgba(230, 57, 70, 0.25);
+$border-accent: rgba(230, 57, 70, 0.4);
+$border-dark: rgba(255, 255, 255, 0.06);
+
+// ============================================
+// TYPOGRAPHY
+// ============================================
+
+$font-family-base: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+$font-family-mono: 'SF Mono', 'Monaco', 'Inconsolata', 'Fira Code', monospace;
+
+$font-size-base: 0.95rem;
+$font-size-xs: 0.7rem;
+$font-size-sm: 0.85rem;
+$font-size-lg: 1.1rem;
+$font-size-xl: 1.25rem;
+$font-size-2xl: 1.5rem;
+$font-size-3xl: 1.875rem;
+$font-size-4xl: 2.25rem;
+
+$line-height-base: 1.6;
+$line-height-tight: 1.25;
+$line-height-loose: 1.75;
+
+$font-weight-light: 300;
+$font-weight-normal: 400;
+$font-weight-medium: 500;
+$font-weight-semibold: 600;
+$font-weight-bold: 700;
+$font-weight-extrabold: 800;
+
+// ============================================
+// SPACING SYSTEM (8px base)
+// ============================================
+
+$spacing-xs: 0.25rem;
+$spacing-sm: 0.5rem;
+$spacing-md: 1rem;
+$spacing-lg: 1.5rem;
+$spacing-xl: 2rem;
+$spacing-2xl: 2.5rem;
+$spacing-3xl: 3rem;
+$spacing-4xl: 4rem;
+$spacing-5xl: 5rem;
+
+// ============================================
+// BORDER RADIUS
+// ============================================
+
+$radius-xs: 4px;
+$radius-sm: 8px;
+$radius-md: 12px;
+$radius-lg: 16px;
+$radius-xl: 20px;
+$radius-2xl: 24px;
+$radius-3xl: 32px;
+$radius-full: 9999px;
+
+// ============================================
+// SHADOWS - DARK THEME PREMIUM
+// ============================================
+
+$shadow-xs: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
+$shadow-sm: 0 2px 4px -1px rgba(0, 0, 0, 0.6), 0 1px 3px -1px rgba(0, 0, 0, 0.5);
+$shadow-md: 0 4px 8px -2px rgba(0, 0, 0, 0.6), 0 2px 4px -2px rgba(0, 0, 0, 0.5);
+$shadow-lg: 0 12px 20px -4px rgba(0, 0, 0, 0.7), 0 4px 8px -4px rgba(0, 0, 0, 0.6);
+$shadow-xl: 0 20px 30px -6px rgba(0, 0, 0, 0.7), 0 8px 12px -6px rgba(0, 0, 0, 0.6);
+$shadow-2xl: 0 30px 50px -12px rgba(0, 0, 0, 0.8);
+
+$shadow-glow-red: 0 0 30px rgba(230, 57, 70, 0.3), 0 0 15px rgba(230, 57, 70, 0.2);
+$shadow-glow-orange: 0 0 30px rgba(244, 162, 97, 0.25), 0 0 15px rgba(244, 162, 97, 0.15);
+$shadow-glow-success: 0 0 25px rgba(42, 157, 143, 0.25);
+$shadow-glow-info: 0 0 25px rgba(0, 180, 216, 0.25);
+
+$shadow-card: 0 1px 3px rgba(0, 0, 0, 0.5), 0 8px 20px rgba(0, 0, 0, 0.6);
+$shadow-card-hover: 0 4px 12px rgba(230, 57, 70, 0.15), 0 12px 30px rgba(0, 0, 0, 0.7);
+
+// ============================================
+// TRANSITIONS & ANIMATIONS
+// ============================================
+
+$transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+$transition-base: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+$transition-slow: 350ms cubic-bezier(0.4, 0, 0.2, 1);
+$transition-bounce: 300ms cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+// ============================================
+// Z-INDEX SCALE
+// ============================================
+
+$z-index-dropdown: 1000;
+$z-index-sticky: 1020;
+$z-index-fixed: 1030;
+$z-index-modal-backdrop: 1040;
+$z-index-modal: 1050;
+$z-index-popover: 1060;
+$z-index-tooltip: 1070;
+$z-index-toast: 1080;
+$z-index-alarm: 1100;
+
+// ============================================
+// GLOBAL RESET & BASE STYLES (DARK ONLY)
+// ============================================
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  font-family: $font-family-base;
+  font-size: $font-size-base;
+  line-height: $line-height-base;
+  color: $text-secondary;
+  background: $bg-primary;
+  min-height: 100vh;
+  font-weight: $font-weight-normal;
+  letter-spacing: -0.01em;
+  position: relative;
+  
+  &::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: 
+      radial-gradient(circle at 15% 25%, rgba(230, 57, 70, 0.06), transparent 45%),
+      radial-gradient(circle at 85% 75%, rgba(244, 162, 97, 0.05), transparent 45%),
+      radial-gradient(circle at 50% 50%, rgba(255, 183, 3, 0.03), transparent 55%);
+    pointer-events: none;
+    z-index: -1;
+  }
+}
+
+// ============================================
+// GLOBAL FORM INPUT & TEXT VISIBILITY FIX
+// ============================================
+
+input,
+textarea,
+select,
+.form-control,
+.form-select {
+  color: #ffffff !important;
+  caret-color: #ffffff !important;
+  font-weight: 400;
+
+  &::placeholder {
+    color: rgba(255, 255, 255, 0.45) !important;
+    opacity: 1 !important;
+  }
+
+  /* Browser Autofill Dark Mode Fix */
+  &:-webkit-autofill,
+  &:-webkit-autofill:hover,
+  &:-webkit-autofill:focus,
+  &:-webkit-autofill:active {
+    -webkit-text-fill-color: #ffffff !important;
+    -webkit-box-shadow: 0 0 0 1000px #16213e inset !important;
+    transition: background-color 5000s ease-in-out 0s;
+    caret-color: #ffffff !important;
+  }
+}
+
+// Typography Scale - Dark Theme
+h1, h2, h3, h4, h5, h6 {
+  font-weight: $font-weight-bold;
+  line-height: $line-height-tight;
+  letter-spacing: -0.02em;
+  color: $text-primary;
+  margin-bottom: $spacing-md;
+}
+
+h1 { 
+  font-size: $font-size-4xl; 
+  font-weight: $font-weight-extrabold; 
+  background: linear-gradient(135deg, $text-primary 0%, rgba(255, 255, 255, 0.85) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+h2 { font-size: $font-size-3xl; font-weight: $font-weight-bold; }
+h3 { font-size: $font-size-2xl; font-weight: $font-weight-semibold; }
+h4 { font-size: $font-size-xl; font-weight: $font-weight-semibold; }
+h5 { font-size: $font-size-lg; font-weight: $font-weight-medium; }
+h6 { 
+  font-size: $font-size-base; 
+  font-weight: $font-weight-medium; 
+  text-transform: uppercase; 
+  letter-spacing: 0.05em;
+  color: $text-tertiary;
+}
+
+p {
+  margin-bottom: $spacing-md;
+  color: $text-secondary;
+  line-height: $line-height-loose;
+}
+
+a {
+  color: $primary-orange-light;
+  text-decoration: none;
+  font-weight: $font-weight-medium;
+  transition: all $transition-fast;
+  position: relative;
+  
+  &:hover {
+    color: $primary-orange;
+  }
+}
+
+// Code styling - Dark
+code, pre {
+  font-family: $font-family-mono;
+  background: rgba(0, 0, 0, 0.4);
+  padding: 0.2em 0.4em;
+  border-radius: $radius-sm;
+  font-size: 0.9em;
+  color: $primary-orange-light;
+  border: 1px solid $border-dark;
+}
+
+// Custom Scrollbar - Dark Theme
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: $radius-full;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, $primary-red-dark, $primary-orange-dark);
+  border-radius: $radius-full;
+  border: 1px solid $border-light;
+  
+  &:hover {
+    background: linear-gradient(135deg, $primary-red, $primary-orange);
+  }
+}
+
+// Selection styling - Dark
+::selection {
+  background: rgba(230, 57, 70, 0.35);
+  color: $text-primary;
+}
+
+::-moz-selection {
+  background: rgba(230, 57, 70, 0.35);
+  color: $text-primary;
+}
+
+// ============================================
+// SIDEBAR - DARK THEME PREMIUM
+// ============================================
+
+.sidebar-desktop {
+  width: 280px;
+  min-height: 100vh;
+  background: linear-gradient(180deg, $darker 0%, $black 100%);
+  border-right: 1px solid $border-light;
+  position: sticky;
+  top: 0;
+  box-shadow: inset -1px 0 0 rgba(0, 0, 0, 0.4), $shadow-lg;
+  
+  .sidebar-content {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    
+    .sidebar-header {
+      padding: $spacing-xl $spacing-lg;
+      border-bottom: 1px solid $border-light;
+      background: linear-gradient(135deg, rgba(230, 57, 70, 0.1), transparent);
+      
+      h5 {
+        color: $text-primary;
+        font-weight: $font-weight-bold;
+        font-size: 1.5rem;
+        letter-spacing: -0.02em;
+        margin-bottom: $spacing-xs;
+        display: flex;
+        align-items: center;
+        gap: $spacing-sm;
+        
+        svg {
+          color: $primary-orange;
+          filter: drop-shadow(0 0 12px rgba(244, 162, 97, 0.4));
+          font-size: 1.75rem;
+        }
+      }
+      
+      small {
+        color: $text-tertiary;
+        font-weight: $font-weight-medium;
+        font-size: $font-size-xs;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+    }
+    
+    .user-info {
+      padding: $spacing-lg;
+      background: $bg-elevated;
+      border-bottom: 1px solid $border-light;
+      @include backdrop-blur(12px);
+      
+      .fw-bold {
+        font-weight: $font-weight-semibold !important;
+        color: $text-primary;
+        font-size: $font-size-base;
+      }
+      
+      .badge {
+        font-weight: $font-weight-semibold;
+        letter-spacing: 0.3px;
+        text-transform: uppercase;
+        font-size: $font-size-xs;
+        padding: 0.3rem 0.7rem;
+        background: linear-gradient(135deg, $primary-red, $primary-orange) !important;
+        border-radius: $radius-full;
+        box-shadow: $shadow-glow-red;
+      }
+      
+      small {
+        color: $text-tertiary;
+        font-size: $font-size-xs;
+        font-weight: $font-weight-normal;
+      }
+    }
+    
+    .sidebar-nav {
+      flex: 1;
+      overflow-y: auto;
+      padding: $spacing-lg $spacing-sm;
+      
+      .list-group-item {
+        background: transparent;
+        color: $text-secondary;
+        border: none;
+        font-weight: $font-weight-medium;
+        font-size: $font-size-sm;
+        padding: 0.85rem 1rem;
+        margin-bottom: $spacing-xs;
+        border-radius: $radius-lg;
+        transition: all $transition-base;
+        position: relative;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        
+        svg {
+          font-size: 1.25rem;
+          margin-right: $spacing-md;
+          transition: all $transition-base;
+          color: $text-tertiary;
+        }
+        
+        &::before {
+          content: '';
+          position: absolute;
+          left: 0;
+          top: 50%;
+          transform: translateY(-50%);
+          width: 3px;
+          height: 0;
+          background: linear-gradient(180deg, $primary-red, $primary-orange);
+          border-radius: $radius-full;
+          transition: height $transition-base;
+        }
+        
+        &:hover {
+          background: linear-gradient(90deg, rgba(230, 57, 70, 0.12), transparent);
+          color: $text-primary;
+          
+          svg {
+            color: $primary-orange-light;
+            transform: translateX(3px);
+          }
+          
+          &::before {
+            height: 60%;
+          }
+        }
+        
+        &.active {
+          background: linear-gradient(90deg, rgba(230, 57, 70, 0.15), rgba(244, 162, 97, 0.05));
+          color: $text-primary;
+          
+          svg {
+            color: $primary-orange;
+          }
+          
+          &::before {
+            height: 60%;
+            background: linear-gradient(180deg, $primary-red, $primary-orange);
+          }
+        }
+        
+        &.text-danger {
+          color: $primary-red-light !important;
+          
+          &:hover {
+            background: rgba(230, 57, 70, 0.15);
+            color: $text-primary !important;
+          }
+          
+          svg {
+            color: $primary-red-light;
+          }
+        }
+      }
+    }
+  }
+}
+
+// ============================================
+// MAIN CONTENT AREA - DARK THEME
+// ============================================
+
+.main-content {
+  flex: 1;
+  min-height: 100vh;
+  background: transparent;
+  position: relative;
+  
+  .navbar {
+    background: $bg-glass !important;
+    @include backdrop-blur-saturate(20px, 180%);
+    border-bottom: 1px solid $border-light;
+    padding: $spacing-md $spacing-xl;
+    position: sticky;
+    top: 0;
+    z-index: $z-index-sticky;
+    box-shadow: $shadow-sm;
+    
+    h4 {
+      font-weight: $font-weight-bold;
+      font-size: 1.5rem;
+      letter-spacing: -0.02em;
+      background: linear-gradient(135deg, $text-primary, $primary-orange-light);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-transform: capitalize;
+      margin: 0;
+    }
+    
+    .nav-link {
+      color: $text-secondary;
+      font-weight: $font-weight-medium;
+      transition: all $transition-fast;
+      
+      &:hover {
+        color: $primary-orange-light;
+      }
+    }
+    
+    .dropdown-menu {
+      background: $bg-glass;
+      @include backdrop-blur(16px);
+      border: 1px solid $border-light;
+      border-radius: $radius-lg;
+      box-shadow: $shadow-xl;
+      
+      .dropdown-item {
+        color: $text-secondary;
+        transition: all $transition-fast;
+        
+        &:hover {
+          background: rgba(230, 57, 70, 0.1);
+          color: $text-primary;
+        }
+      }
+    }
+  }
+  
+  > .container-fluid {
+    padding: $spacing-xl $spacing-2xl;
+  }
+}
+
+// ============================================
+// STATS CARDS - DARK PREMIUM
+// ============================================
+
+.stats-card {
+  background: $bg-card;
+  @include backdrop-blur(12px);
+  border-radius: $radius-xl;
+  border: 1px solid $border-light;
+  box-shadow: $shadow-card;
+  transition: all $transition-base;
+  overflow: hidden;
+  position: relative;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at top right, rgba(230, 57, 70, 0.1), transparent 70%);
+    opacity: 0;
+    transition: opacity $transition-base;
+  }
+  
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, $primary-red, $primary-orange, $primary-orange-light);
+    opacity: 0;
+    transition: opacity $transition-base;
+  }
+  
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: $shadow-card-hover;
+    border-color: $border-medium;
+    
+    &::before {
+      opacity: 1;
+    }
+    
+    &::after {
+      opacity: 1;
+    }
+  }
+  
+  .card-body {
+    padding: $spacing-xl;
+    position: relative;
+    z-index: 1;
+  }
+  
+  h3 {
+    font-weight: $font-weight-extrabold;
+    font-size: 2.5rem;
+    letter-spacing: -0.03em;
+    margin-bottom: $spacing-xs;
+    line-height: 1;
+    color: $text-primary;
+  }
+  
+  small {
+    font-weight: $font-weight-medium;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-size: $font-size-xs;
+    color: $text-tertiary;
+  }
+  
+  .stats-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: $radius-lg;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all $transition-base;
+    
+    svg {
+      font-size: 1.75rem;
+      filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+    }
+    
+    &.bg-danger {
+      background: linear-gradient(135deg, $primary-red, $primary-red-light) !important;
+    }
+    
+    &.bg-primary {
+      background: linear-gradient(135deg, $primary-orange-dark, $primary-orange) !important;
+    }
+    
+    &.bg-warning {
+      background: linear-gradient(135deg, $primary-orange, $primary-orange-light) !important;
+    }
+    
+    &.bg-success {
+      background: linear-gradient(135deg, $success, $success-light) !important;
+    }
+  }
+  
+  &.border-danger { border-color: rgba(230, 57, 70, 0.3) !important; }
+  &.border-primary { border-color: rgba(244, 162, 97, 0.3) !important; }
+  &.border-warning { border-color: rgba(244, 162, 97, 0.3) !important; }
+  &.border-success { border-color: rgba(42, 157, 143, 0.3) !important; }
+  &.border-info { border-color: rgba(0, 180, 216, 0.3) !important; }
+  &.border-secondary { border-color: rgba(100, 116, 139, 0.3) !important; }
+}
+
+// ============================================
+// CARDS - DARK THEME
+// ============================================
+
+.card {
+  background: $bg-card;
+  @include backdrop-blur(12px);
+  border: 1px solid $border-light;
+  border-radius: $radius-xl;
+  box-shadow: $shadow-card;
+  transition: all $transition-base;
+  overflow: hidden;
+  
+  &:hover {
+    box-shadow: $shadow-lg;
+    border-color: $border-medium;
+  }
+  
+  .card-header {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), transparent);
+    border-bottom: 1px solid $border-light;
+    padding: $spacing-lg $spacing-xl;
+    font-weight: $font-weight-semibold;
+    font-size: $font-size-sm;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: $text-secondary;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    
+    h5, h6 {
+      margin-bottom: 0;
+      color: $text-primary;
+    }
+  }
+  
+  .card-body {
+    padding: $spacing-xl;
+  }
+  
+  .card-footer {
+    background: rgba(0, 0, 0, 0.2);
+    border-top: 1px solid $border-light;
+    padding: $spacing-lg $spacing-xl;
+  }
+  
+  &.sensor-card {
+    cursor: pointer;
+    
+    &:hover {
+      transform: translateY(-2px);
+      border-color: $primary-orange;
+      box-shadow: $shadow-glow-orange;
+    }
+  }
+}
+
+// ============================================
+// MODALS - DARK THEME (FIXED BACKDROP-FILTER)
+// ============================================
+
+.modal-backdrop {
+  background: rgba(0, 0, 0, 0.85);
+  @include backdrop-blur(8px);
+}
+
+// ============================================
+// ALERTS - DARK THEME
+// ============================================
+
+.alert {
+  border: none;
+  border-radius: $radius-lg;
+  font-weight: $font-weight-medium;
+  padding: $spacing-md $spacing-xl;
+  display: flex;
+  align-items: center;
+  @include backdrop-blur(12px);
+  box-shadow: $shadow-md;
+  
+  svg {
+    font-size: 1.2rem;
+  }
+  
+  &.alert-danger {
+    background: rgba(230, 57, 70, 0.15);
+    color: $danger-light;
+    border-left: 4px solid $danger;
+  }
+  
+  &.alert-warning {
+    background: rgba(244, 162, 97, 0.15);
+    color: $primary-orange-light;
+    border-left: 4px solid $primary-orange;
+  }
+  
+  &.alert-success {
+    background: rgba(42, 157, 143, 0.15);
+    color: $success-light;
+    border-left: 4px solid $success;
+  }
+  
+  &.alert-info {
+    background: rgba(0, 180, 216, 0.15);
+    color: $info-light;
+    border-left: 4px solid $info;
+  }
+  
+  .btn-close {
+    filter: invert(1);
+  }
+}
+
+// ============================================
+// DISPATCHER PANELS - FIXED BACKDROP-FILTER
+// ============================================
+
+.dispatcher-panel {
+  position: absolute;
+  z-index: $z-index-sticky;
+  
+  &.left-panel {
+    top: 20px;
+    left: 20px;
+    width: 340px;
+  }
+  
+  &.right-panel {
+    top: 20px;
+    right: 20px;
+    width: 300px;
+  }
+  
+  .panel-card {
+    background: rgba(11, 19, 43, 0.95);
+    @include backdrop-blur(16px);
+    border: 1px solid $border-light;
+    border-radius: $radius-lg;
+    box-shadow: $shadow-xl;
+    color: $text-primary;
+    
+    .card-header {
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), transparent);
+      border-bottom: 1px solid $border-light;
+      color: $text-primary;
+      font-weight: $font-weight-semibold;
+      padding: $spacing-md $spacing-lg;
+    }
+    
+    .list-group-item {
+      background: transparent;
+      color: $text-secondary;
+      border-bottom: 1px solid $border-dark;
+      cursor: pointer;
+      transition: all $transition-fast;
+      
+      &:hover {
+        background: rgba(230, 57, 70, 0.1);
+      }
+      
+      &.border-danger {
+        border-left: 4px solid $danger !important;
+      }
+    }
+  }
+}
+
+.dispatcher-legend {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  z-index: $z-index-sticky;
+  background: rgba(11, 19, 43, 0.95);
+  @include backdrop-blur(16px);
+  border: 1px solid $border-light;
+  border-radius: $radius-lg;
+  padding: 0.85rem 1.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+  box-shadow: $shadow-lg;
+  
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    color: $text-secondary;
+    font-size: $font-size-xs;
+    font-weight: $font-weight-medium;
+    
+    .legend-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: $radius-full;
+      transition: all $transition-fast;
+      
+      &.bg-danger {
+        background: $danger;
+        box-shadow: 0 0 12px $danger;
+      }
+      
+      &.bg-warning {
+        background: $warning;
+        box-shadow: 0 0 12px $warning;
+      }
+      
+      &.bg-success {
+        background: $success;
+        box-shadow: 0 0 8px $success;
+      }
+      
+      &.bg-primary {
+        background: $primary-red;
+        box-shadow: 0 0 8px $primary-red;
+      }
+      
+      &.bg-info {
+        background: $info;
+        box-shadow: 0 0 8px $info;
+      }
+      
+      &.blinking-red {
+        animation: blinkRed 1s infinite;
+      }
+      
+      &.blinking-yellow {
+        animation: blinkYellow 1s infinite;
+      }
+    }
+  }
+}
+
+// ============================================
+// UTILITY CLASSES - DARK THEME
+// ============================================
+
+.bg-glass {
+  background: $bg-glass !important;
+  @include backdrop-blur(16px);
+}
+
+// ============================================
+// ERROR PAGES
+// ============================================
+
+.unauthorized-page,
+.not-found-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #0b132b 0%, #1a1a2e 100%);
+  color: white;
+  text-align: center;
+  padding: 2rem;
+
+  h1 {
+    font-size: 6rem;
+    font-weight: 800;
+    color: #dc3545;
+    margin-bottom: 1rem;
+    text-shadow: 0 0 30px rgba(220, 53, 69, 0.5);
+  }
+
+  h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: white;
+  }
+
+  p {
+    font-size: 1.1rem;
+    color: #a0a0a0;
+    margin-bottom: 2rem;
+  }
+
+  a {
+    display: inline-block;
+    padding: 0.75rem 2rem;
+    background: linear-gradient(135deg, #dc3545, #f4a261);
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(220, 53, 69, 0.3);
+      color: white;
+    }
+  }
+}
+
+.not-found-page h1 {
+  font-size: 8rem;
+}
+
+/* src/styles/animations.css - Add to your global styles */
+@keyframes slideIn {
+  from { transform: translateX(100%); }
+  to { transform: translateX(0); }
+}
+
+@keyframes fadeInScale {
+  from { opacity: 0; transform: translate(-50%, -50%) scale(0.95); }
+  to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(220, 53, 69, 0.7); }
+  50% { box-shadow: 0 0 20px 5px rgba(220, 53, 69, 0.9); }
+}
+
+@keyframes pulse-glow-fast {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(255, 0, 0, 0.7); }
+  50% { box-shadow: 0 0 30px 10px rgba(255, 0, 0, 1); }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.spin {
+  animation: spin 1s linear infinite;
+}
+
+/* Custom scrollbar for dark theme */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #1a1a2e;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #3a3a4e;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #4a4a5e;
+}
+
+// ============================================
+// COMPREHENSIVE RESPONSIVE LAYOUT SYSTEM
+// ============================================
+
+/* Tables - Horizontal Scrolling on Mobile */
+.table-responsive {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border-radius: $radius-md;
+  
+  table {
+    min-width: 650px;
+  }
+}
+
+/* Modals - Responsive Scaling */
+.modal-dialog {
+  max-width: 540px;
+  margin: 1.5rem auto;
+
+  @media (max-width: 576px) {
+    max-width: 95%;
+    margin: 0.75rem auto;
+  }
+}
+
+/* Page Headers & Toolbars */
+.page-header {
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: flex-start !important;
+    gap: 1rem;
+
+    .header-actions {
+      width: 100%;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+
+      .btn {
+        flex: 1;
+        min-width: 120px;
+      }
+    }
+  }
+}
+
+/* Responsive Filters & Search Bars */
+.search-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+
+  .search-icon, svg {
+    position: absolute !important;
+    left: 16px !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    color: #f4a261 !important;
+    z-index: 10 !important;
+    pointer-events: none !important;
+    font-size: 16px !important;
+  }
+
+  input.form-control, input {
+    padding-left: 52px !important;
+    padding-right: 16px !important;
+  }
+}
+
+.filter-card, .search-bar-wrapper {
+  @media (max-width: 768px) {
+    .row {
+      row-gap: 0.75rem;
+    }
+  }
+}
+
+/* Grid & Card Containers */
+.dashboard-grid, .stats-row {
+  @media (max-width: 768px) {
+    margin-top: 1rem;
+  }
+}
+
+.stat-card, .metric-card {
+  @media (max-width: 576px) {
+    padding: 1rem !important;
+  }
+}
+
